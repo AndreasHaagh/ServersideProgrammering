@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "node js server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndreasHaagh/ServersideProgrammering.git"
+  },
+  "author": "Andreas Flyvholm Haagh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndreasHaagh/ServersideProgrammering/issues"
+  },
+  "homepage": "https://github.com/AndreasHaagh/ServersideProgrammering#readme",
+  "devDependencies": {
+    "mysql": "^2.17.1"
+  }
+}
