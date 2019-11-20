@@ -16,6 +16,14 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname+'/pages/index.html'));
 });
 
+app.get('/scripts/home.js', (req, res) => {
+  res.sendFile(path.join(__dirname+'/scripts/home.js'));
+});
+
+app.get('/styles/main.css', (req, res) => {
+  res.sendFile(path.join(__dirname+'/styles/main.css'));
+});
+
 const Login = require('./server/login');
 const login = new Login();
 
