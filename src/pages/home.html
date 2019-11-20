@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <title>Home Page</title>
+</head>
+<h1>Password Manager</h1>
+
+<h4 id="user">Hello </h4>
+<form action="logout" method="POST">
+  <input type="submit" name="submit" value="logout">
+</form>
+
+<h3>Add new secret</h3>
+<body>
+  <form action="newSecret" method="POST">
+    <input type="text" name="source" placeholder="source" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <input type="submit">
+  </form>
+
+  <h3>table of secrets</h3>
+  <table id="password-table">
+    <thead>
+      <tr>
+        <th>source</th>
+        <th>password</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</body>
+<script>
+  $(document).ready(() => {
+    $.get('/userdata', (data) => {
+      $('#user').append(data.name);
+    });
+
+    $.get('/getSecrets', (data) => {
+      data.forEach(secret => {
+        $('#password-table tbody').append(`
+        <tr>
+          <td>${secret.source}</td>
+          <td>${secret.password}</td>
+          <td>
+            <button class="delete-btn" name="delete" value="${secret.id}">X</button>
+          </td>
+        </tr>`);
+      });
+    });
+    
+    $('#password-table tbody').on('click', 'button', (button) => {
+      const secretid = button.target.value;
+      $.post('/deleteSecret');
+    })
+  });
+</script>
+</html>

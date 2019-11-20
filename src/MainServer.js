@@ -1,7 +1,6 @@
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
-const db = require('./server/lib/db');
 const app = express();
 const port = 3001;
 
@@ -14,43 +13,44 @@ app.use(express.urlencoded({extended : true}));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname+'/index.html'));
-})
-
-const router = express.Router();
-router.get('/', (req, res) => {
-  res.send('Hello api');
+  res.sendFile(path.join(__dirname+'/pages/index.html'));
 });
 
-app.post('/auth', (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
-  if (username && password) {
-    db.query(`SELECT * FROM users WHERE name = '${username}' AND password = '${password}'`, (err, results, fields) => {
-      if (results.length > 0) {
-        req.session.loggedin = true;
-        req.session.username = username;
-        res.redirect('/home');
-      } else {
-        res.send(`Incorrect Username and/or Password! ${username} ${password}`);
-      }
-      res.end();
-    });
-  } else {
-    res.send('Please enter username and password');
-    res.end();
-  }
-});
+const Login = require('./server/login');
+const login = new Login();
 
-app.get('/home', (req, res) => {
-  if (req.session.loggedin) {
-    res.send(`Welcome back ${req.session.username}!`);
-  } else {
-    res.redirect('/')
-  }
+app.post('/auth', login.LoginUser);
+app.get('/userdata', login.IsLoginIn, (req, res) => {
+  res.send(req.session.user);
   res.end();
 });
 
-app.use('/api', router);
+app.post('/logout', login.IsLoginIn, (req, res) => {
+  if (req.session) {
+    req.session.destroy((err) => {
+      if (err) throw err;
+      res.redirect('/');
+    })
+  }
+});
+
+const signup = require('./server/signup');
+app.post('/sign-up', signup);
+
+app.get('/home', (req, res) => {
+  if (req.session.loggedin) {
+    res.sendFile(path.join(__dirname+'/pages/home.html'));
+  } else {
+    res.redirect('/')
+  }
+});
+
+const Secrets = require('./server/secrets');
+const secrets = new Secrets();
+
+app.post('/newSecret', login.IsLoginIn, secrets.InsertSecret);
+app.get('/getSecrets', login.IsLoginIn, secrets.GetSecrets);
+app.post('/deleteSecret', login.IsLoginIn, secrets.DeleteSecret);
+app.post('/updateSecret', login.IsLoginIn, secrets.UpdateSecret);
 
 app.listen(port, () => console.log(`The server is runnning on port ${port}`));
