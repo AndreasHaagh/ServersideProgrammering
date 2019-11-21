@@ -26,7 +26,7 @@
   </div>
 
   <div class="wrapper">
-    <div class="top-content">
+    <div class="top content">
       <h3>Add new secret</h3>
       <form action="newSecret" method="POST">
         <input type="text" name="source" placeholder="source" required>
@@ -34,13 +34,17 @@
         <input type="submit">
       </form>
     </div>
-    <div class="bottom-content">
+    <div class="bottom content">
       <h3>table of secrets</h3>
+      <div id="search">
+        <input id="search-text" type="text" name="search" placeholder="source">
+        <input id="search-btn" type="button" value="search">
+      </div>
       <table id="password-table">
         <thead>
           <tr>
             <th>source</th>
-            <th>password</th>
+            <th colspan="3">password</th>
           </tr>
         </thead>
         <tbody></tbody>

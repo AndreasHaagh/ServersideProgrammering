@@ -132,6 +132,11 @@ ul {
   background-color: rgb(46, 46, 46);
 }
 
+h1 {
+  font-size: 3vh;
+  margin: auto;
+}
+
 .wrapper {
   width: 100vw;
   height: 100vh;
@@ -139,10 +144,15 @@ ul {
   padding: 20px;
 }
 
-.top-content {
-  width: 75%;
+.content {
+  border-radius: 5px;
+  border: rgb(197, 89, 1) solid 3px;
   background: rgb(255, 255, 255);
-  display: block;
+  background: rgb(255, 255, 255);
+}
+
+.top.content {
+  width: 75%;
   margin: 0 auto;
 }
 
@@ -151,8 +161,94 @@ h3 {
   text-align: center;
 }
 
-.bottom-content {
+form {
+  margin: 10px auto;
+  width: 500px;
+}
+
+.bottom.content {
   width: 75%;
-  background: rgb(255, 255, 255);
   margin: 20px auto;
+}
+
+.sign-up-form {
+  width: 600px;
+}
+
+#search {
+  width: 17%;
+  margin: 15px auto 0 auto;
+}
+
+#password-table {
+  margin: 20px auto;
+}
+
+table#password-table {
+  border: 1px solid #C46A20;
+  background-color: #EEEEEE;
+  width: 60%;
+  text-align: left;
+  border-collapse: collapse;
+}
+table#password-table td, table#password-table th {
+  border: 1px solid #AAAAAA;
+  padding: 3px 2px;
+}
+table#password-table tbody td {
+  font-size: 15px;
+  text-align: center;
+}
+table#password-table tr:nth-child(even) {
+  background: #D0E4F5;
+}
+table#password-table thead {
+  background: #969696;
+  background: -moz-linear-gradient(top, #b0b0b0 0%, #a0a0a0 66%, #969696 100%);
+  background: -webkit-linear-gradient(top, #b0b0b0 0%, #a0a0a0 66%, #969696 100%);
+  background: linear-gradient(to bottom, #b0b0b0 0%, #a0a0a0 66%, #969696 100%);
+  border-bottom: 2px solid #444444;
+}
+table#password-table thead th {
+  font-size: 17px;
+  font-weight: bold;
+  color: #FFFFFF;
+  border-left: 2px solid #C46A20;
+}
+table#password-table thead th:first-child {
+  border-left: none;
+}
+
+table#password-table tfoot {
+  font-size: 14px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #C46A20;
+  background: -moz-linear-gradient(top, #d38f58 0%, #ca7936 66%, #C46A20 100%);
+  background: -webkit-linear-gradient(top, #d38f58 0%, #ca7936 66%, #C46A20 100%);
+  background: linear-gradient(to bottom, #d38f58 0%, #ca7936 66%, #C46A20 100%);
+  border-top: 2px solid #444444;
+}
+table#password-table tfoot td {
+  font-size: 14px;
+}
+table#password-table tfoot .links {
+  text-align: right;
+}
+table#password-table tfoot .links a{
+  display: inline-block;
+  background: #1C6EA4;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+
+.deleteForm {
+  width: 22px;
+  margin: auto;
+}
+
+.updateForm {
+  width: 80px;
+  margin: auto;
 }

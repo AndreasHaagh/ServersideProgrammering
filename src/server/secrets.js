@@ -2,7 +2,14 @@ const db = require('./lib/db');
 
 class Secrets {
   GetSecrets(req, res) {
-    db.query(`SELECT * FROM secrets WHERE user_id = '${req.session.user.id}'`, (err, result, fields) => {
+    const source = req.query.source;
+    var sql;
+    if (source) {
+      sql = `SELECT * FROM secrets WHERE source = '${source}' AND user_id =`;
+    } else {
+      sql = `SELECT * FROM secrets WHERE user_id =`;
+    }
+    db.query(`${sql} '${req.session.user.id}'`, (err, result, fields) => {
       res.send(result);
     });
   }
@@ -27,15 +34,29 @@ class Secrets {
   }
 
   UpdateSecret(req, res) {
-    return new Promise((resolve, reject) => {
-
-    });
+    const id = req.body.id;
+    const source = req.body.source;
+    const password = req.body.password;
+    if (id && source && password) {
+      db.query('UPDATE secrets SET source = ?, password = ? WHERE id = ?', [source, password, id], (err, result) => {
+        if (err) throw err;
+        res.redirect('/home');
+      });
+    } else {
+      res.send('Missing source, password or id');
+    }
   }
 
   DeleteSecret(req, res) {
-    return new Promise((resolve, reject) => {
-
-    });
+    const id = req.body.id
+    if (id) {
+      db.query(`DELETE FROM secrets WHERE id = '${req.body.id}'`, (err, result) => {
+        if (err) throw err;
+        res.redirect('/home');
+      });
+    } else {
+      res.send('Please provide an id on the secret');
+    }
   }
 }
 

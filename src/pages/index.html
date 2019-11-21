@@ -4,25 +4,39 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="styles/main.css" type="text/css">
   <title>Login Page</title>
 </head>
 <body>
-  <h1>Password Manger</h1>
-  <div class="login-form">
-    <h3>Login Form</h3>
-    <form action="auth" method="POST">
-      <input type="text" name="username" placeholder="Username" required>
-      <input type="password" name="password" placeholder="Password" required>
-      <input type="submit">
-    </form>
+    <div class="nav">
+        <ul>
+          <li class="nav-item left">
+            <h1>Password Manager</h1>
+          </li>
+        </ul>
+      </div>
 
-    <h3>Sign-up Form</h3>
-    <form action="sign-up" method="POST">
-      <input type="text" name="username" placeholder="username" required>
-      <input type="password" name="password" placeholder="password" required>
-      <input type="password" name="password_match" placeholder="type the password again" required>
-      <input type="submit">
-    </form>
+  <div class="wrapper">
+    <div class="top content">
+        <h3>Login Form</h3>
+        <form action="auth" method="POST">
+          <input type="text" name="username" placeholder="Username" required>
+          <input type="password" name="password" placeholder="Password" required>
+          <input type="submit">
+        </form>
+    </div>
+    <div class="bottom content">
+        <h3>Sign-up Form</h3>
+        <form class="sign-up-form" action="sign-up" method="POST">
+          <input type="text" name="username" placeholder="username" required>
+          <input type="password" name="password" placeholder="password" required>
+          <input type="password" name="password_match" placeholder="type the password again" required>
+          <input type="submit">
+        </form>
+    </div>
+  </div>
+  
+  <div class="login-form">
   </div>
 </body>
 <script src="./scripts/main.js"></script>
